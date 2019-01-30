@@ -60,3 +60,4 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 }
 
 // console.log(toMatrix([1, 2, 3, 4, 5, true, '5', 7], 3));
+// get test
