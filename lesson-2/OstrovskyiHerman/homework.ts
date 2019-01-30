@@ -89,7 +89,62 @@ function debounce(f: Function, ms: number): Function {
     };
 }
 
+
+// 6) https://learn.javascript.ru/task/throttle
+
+function throttleMethod(timer: number = 500): Function {
+    return function (_target: Object, methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor {
+        const originalDescriptorValue: Function = descriptor.value;
+        // tslint:disable-next-line
+        console.log(`${methodName} methos needs to be throttled`);
+        return {
+            ...descriptor,
+            value: throttle(originalDescriptorValue, timer)
+        };
+    };
+}
+
+function throttle(func: Function, ms: number): Function {
+
+    let isThrottled: boolean = false;
+    // tslint:disable-next-line
+    let savedArgs: any;
+    // tslint:disable-next-line
+    let savedThis: any;
+
+    function wrapper(): void {
+
+        if (isThrottled) { // (2)
+            savedArgs = arguments;
+            // tslint:disable-next-line
+            savedThis = this;
+            return;
+        }
+        // tslint:disable-next-line
+        func.apply(this, arguments); // (1)
+
+        isThrottled = true;
+
+        setTimeout(function (): void {
+            isThrottled = false; // (3)
+            if (savedArgs) {
+                wrapper.apply(savedThis, savedArgs);
+                savedArgs = savedThis = null;
+            }
+        }, ms);
+    }
+
+    return wrapper;
+}
+
+
 class MathLib {
+    @throttleMethod(1000)
+    public sayHello(name: string): void {
+        // tslint:disable-next-line
+        console.log(`Hello ${name}`);
+    }
+
 
     @debounceMethod(5000)
     public areaOfCircle(r: number): number {
@@ -99,6 +154,15 @@ class MathLib {
     }
 }
 
-// npx ts-node --project lesson-2/OstrovskyiHerman/tsconfig.json  lesson-2/OstrovskyiHerman/homework.ts
 
-let ml: number  = new MathLib().areaOfCircle(5);
+let aoc: number = new MathLib().areaOfCircle(5);
+let ml: MathLib = new MathLib();
+
+let interval: number = setInterval(ml.sayHello, 100);
+
+setTimeout(function(): void {
+    clearInterval(interval);
+}, 5000);
+
+// RUN in terminal:
+// npx ts-node --project lesson-2/OstrovskyiHerman/tsconfig.json  lesson-2/OstrovskyiHerman/homework.ts
