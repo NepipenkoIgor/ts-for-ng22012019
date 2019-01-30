@@ -35,3 +35,18 @@ function summator(...args: stringOrNumber[]): stringOrNumber {
 function getUnique<T>(...args: T[]): T[] {
     return [...new Set(args)];
 }
+
+// 4) Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
+// возвращает новый массив. Число показывает количество элементов в подмассивах,
+// элементы подмассивов беруться из массива data.
+// Оригинальный массив не должен быть изменен.
+
+function toMatrix<T>(data: T[], rowSize: number): T[][] {
+    return data.map((elem: T) => {
+        const rowArr: T[] = [];
+        for (let i: number = 0; i < rowSize; i++) {
+            rowArr.push(elem);
+        }
+        return rowArr;
+    });
+}
