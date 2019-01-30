@@ -20,9 +20,7 @@ type stringOrNumber = string | number;
 
 function summator(...rest: stringOrNumber[]): number {
   return rest.reduce((prev: number, current: stringOrNumber) => {
-    // tslint:disable-next-line:no-console
     // console.log('prev ' + prev + ' current ' + current);
-
     if (typeof current === 'string') {
       return parseInt(current) + prev;
     } else {
@@ -31,5 +29,31 @@ function summator(...rest: stringOrNumber[]): number {
 }, 0);
 }
 
-// tslint:disable-next-line:no-console
 // console.log(summator('11', 2, '3')); // 16
+
+// 3
+function getUnique(...arr: stringOrNumber[]): stringOrNumber[] {
+  return arr.filter((value: stringOrNumber, index: number, array: stringOrNumber[]) => {
+    // tslint:disable-next-line:no-console
+    // console.log('v ', value, 'i ', index, 'a ', array, 'exp', array.indexOf(value) === index);
+
+    return array.indexOf(value) === index;
+  });
+  // return [...new Set(arr)];
+}
+
+// tslint:disable-next-line:no-console
+// console.log(getUnique(1, 2, 3, 1, '2', '3'));
+
+// 4
+function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
+  const result: stringOrNumber[][] = [];
+
+  for (let i: number = 0; i < data.length; i += rowSize) {
+    result.push(data.slice(i, i + rowSize));
+  }
+  return result;
+}
+
+// tslint:disable-next-line:no-console
+toMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 2);
