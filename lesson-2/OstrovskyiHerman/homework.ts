@@ -2,11 +2,11 @@
 //   Возвращает true, если все аргументы, кроме первого входят в первый.
 //   Первым всегда должен быть массив.
 
-function isInArray(checkArr: number[], ...args: number[]): boolean {
+function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
 
     let inArray: boolean = false;
 
-    args.forEach((argItem: number): void => {
+    args.forEach((argItem: T): void => {
         inArray = checkArr.includes(argItem);
     });
 
@@ -23,7 +23,9 @@ function summator(...args: stringOrNumber[]): stringOrNumber {
     if (typeof args[0] === 'string') {
         return args.join('');
     } else {
-        return args.reduce((prev: stringOrNumber, currentValue: stringOrNumber) => Number(prev) + Number(currentValue));
+        return args.reduce(
+            (prev: stringOrNumber, currentValue: stringOrNumber): number => Number(prev) + Number(currentValue)
+        );
     }
 }
 
@@ -42,7 +44,7 @@ function getUnique<T>(...args: T[]): T[] {
 // Оригинальный массив не должен быть изменен.
 
 function toMatrix<T>(data: T[], rowSize: number): T[][] {
-    return data.map((elem: T) => {
+    return data.map((elem: T): T[] => {
         const rowArr: T[] = [];
         for (let i: number = 0; i < rowSize; i++) {
             rowArr.push(elem);
@@ -50,3 +52,53 @@ function toMatrix<T>(data: T[], rowSize: number): T[][] {
         return rowArr;
     });
 }
+
+// 5) https://learn.javascript.ru/task/debounce
+
+
+function debounceMethod(timer: number = 500): Function {
+    return function (_target: Object, methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor {
+        const originalDescriptorValue: Function = descriptor.value;
+        // tslint:disable-next-line
+        console.log(`${methodName} methos needs to be debounced`);
+        return {
+            ...descriptor,
+            value: debounce(originalDescriptorValue, timer)
+        };
+    };
+}
+
+function debounce(f: Function, ms: number): Function {
+
+    let timer: number | null = null;
+    // tslint:disable-next-line
+    return function (...args: any): void {
+        // tslint:disable-next-line
+        const onComplete: Function = () => {
+            // tslint:disable-next-line
+            f.apply(this, args);
+            // tslint:disable-next-line
+            timer = null;
+        };
+
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        timer = setTimeout(onComplete, ms);
+    };
+}
+
+class MathLib {
+
+    @debounceMethod(5000)
+    public areaOfCircle(r: number): number {
+        // tslint:disable-next-line
+        console.log('Debounced!!!');
+        return Math.PI * r ** 2;
+    }
+}
+
+// npx ts-node --project lesson-2/OstrovskyiHerman/tsconfig.json  lesson-2/OstrovskyiHerman/homework.ts
+
+let ml: number  = new MathLib().areaOfCircle(5);
