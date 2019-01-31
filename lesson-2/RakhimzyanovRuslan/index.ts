@@ -68,29 +68,28 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 function debounce(ms: number): Function {
     return (target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
         const method: Function = descriptor.value;
-        descriptor.value = (() => {
-            let timer: number | null;
+        let timer: number | null;
 
-            return function (...args: any[]) {
-                const onComlete = () => {
-                    method.apply(target, args);
-                    timer = null;
-                }
-
-                if (timer) {
-                    clearTimeout(timer);
-                }
-
-                timer = setTimeout(onComlete, ms);
+        descriptor.value = (...args: any[]) => {
+            const onComlete = () => {
+                method.apply(target, args);
+                timer = null;
             }
-        })();
+
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(onComlete, ms);
+        };
+        
     }
 }
 
 // class Dog {
 //     private name = 'Good boy';
 
-//     @debounce(3000)
+//     @debounce(1500)
 //     public woof(text: string) {
 //         console.log(`I am a ${this.name}, ${text}`);
 //     }
