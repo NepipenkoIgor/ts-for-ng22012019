@@ -87,19 +87,19 @@ function debounce(ms: number): Function {
     }
 }
 
-class Dog {
-    private name = 'Good boy';
+// class Dog {
+//     private name = 'Good boy';
 
-    @debounce(3000)
-    public woof(text: string) {
-        console.log(`I am a ${this.name}, ${text}`);
-    }
-}
+//     @debounce(3000)
+//     public woof(text: string) {
+//         console.log(`I am a ${this.name}, ${text}`);
+//     }
+// }
 
-const dog = new Dog();
-console.log('start');
-dog.woof('hi1');
-dog.woof('hi2');
-setTimeout(() => dog.woof('hi3'), 1000);
-setTimeout(() => dog.woof('hi4'), 2000);
-setTimeout(() => dog.woof('hi5'), 4000);
+// const dog = new Dog();
+// console.log('start');
+// dog.woof('hi1');
+// dog.woof('hi2');
+// setTimeout(() => dog.woof('hi3'), 1000);
+// setTimeout(() => dog.woof('hi4'), 2000);
+// setTimeout(() => dog.woof('hi5'), 4000);
