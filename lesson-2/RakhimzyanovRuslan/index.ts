@@ -66,24 +66,40 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 // debounce
 
 function debounce(ms: number): Function {
-    return (_target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
+    return (target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
         const method: Function = descriptor.value;
+        descriptor.value = (() => {
+            let timer: number | null;
 
-        descriptor.value = function(...args: any[]) {
-            return setTimeout(() => method.apply(this, args), ms);
-        }
+            return function (...args: any[]) {
+                const onComlete = () => {
+                    method.apply(target, args);
+                    timer = null;
+                }
+
+                if (timer) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(onComlete, ms);
+            }
+        })();
     }
 }
 
-// class Dog {
-//     private name = 'Good boy';
+class Dog {
+    private name = 'Good boy';
 
-//     @debounce(6000)
-//     public woof(text: string) {
-//         console.log(`I am a ${this.name}, ${text}`);
-//     }
-// }
+    @debounce(3000)
+    public woof(text: string) {
+        console.log(`I am a ${this.name}, ${text}`);
+    }
+}
 
-// const dog = new Dog();
-// console.log('start');
-// dog.woof('hi');
+const dog = new Dog();
+console.log('start');
+dog.woof('hi1');
+dog.woof('hi2');
+setTimeout(() => dog.woof('hi3'), 1000);
+setTimeout(() => dog.woof('hi4'), 2000);
+setTimeout(() => dog.woof('hi5'), 4000);
