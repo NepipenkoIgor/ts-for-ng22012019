@@ -60,3 +60,30 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 }
 
 // console.log(toMatrix([1, 2, 3, 4, 5, true, '5', 7], 3));
+
+
+// 5)*
+// debounce
+
+function debounce(ms: number): Function {
+    return (_target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
+        const method: Function = descriptor.value;
+
+        descriptor.value = function(...args: any[]) {
+            return setTimeout(() => method.apply(this, args), ms);
+        }
+    }
+}
+
+// class Dog {
+//     private name = 'Good boy';
+
+//     @debounce(6000)
+//     public woof(text: string) {
+//         console.log(`I am a ${this.name}, ${text}`);
+//     }
+// }
+
+// const dog = new Dog();
+// console.log('start');
+// dog.woof('hi');
