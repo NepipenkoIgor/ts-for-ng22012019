@@ -28,7 +28,7 @@ type strOrNum = string | number;
 function summator(...args: strOrNum[]): number {
     return args.reduce((total: number, amount: strOrNum) => {
         if (typeof amount === 'string') {
-            amount = parseInt(amount);
+            amount = parseInt(amount) ? parseInt(amount) : 0;
         }
 
         return total + amount;
