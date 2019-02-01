@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "noImplicitThis": false
+  },
+  "include": [
+    "./homework.ts"
+  ]
+}
