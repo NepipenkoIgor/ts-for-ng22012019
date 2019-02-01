@@ -72,3 +72,31 @@ function toMatrix<T>(data: T[], rowSize: number): T[][] {
 
     }).filter((value: T[]) => value);
 }
+
+/**
+ * 5 - debounce
+ */
+
+function debounce(ms: number) {
+    return function (_target: Object, _methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor {
+        const originalDescriptorValue: Function = descriptor.value;
+        let timer: null | number = null;
+
+        // tslint:disable-next-line
+        descriptor.value = function(...args: any[]) {
+            const onComplete: Function = () => {
+                timer = null;
+                originalDescriptorValue.apply(this, args);
+            };
+
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(onComplete, ms);
+        };
+
+        return descriptor;
+    };
+}
+
