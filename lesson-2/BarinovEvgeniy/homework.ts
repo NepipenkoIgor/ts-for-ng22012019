@@ -66,8 +66,97 @@ function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
  */
 
 
+class MathLib {
+
+    // @debounce(1000)
+    @throttle(2000)
+    public areaOfCircle(r: number) {
+        console.log(Math.PI * r ** 2);
+    }
+
+}
+
+function debounce(ms: number) {
+    return (
+        _target: Object,
+        _methodName: string,
+        descriptor: PropertyDescriptor
+    ): PropertyDescriptor => {
+        const originalDescriptorValue: Function = descriptor.value;
+
+        let timer :any = null;
+
+        function decorated(...args: any[])  {
+            if (timer) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(() => {
+                timer = null;
+                originalDescriptorValue.apply(_target, args);
+            }, ms);
+        }
+
+        return {
+            ...descriptor,
+            value: decorated
+        };
+    }
+}
 
 
+/**
+ * 6)* https://learn.javascript.ru/task/throttle
+ */
+
+function throttle(ms: number) {
+    return (
+        _target: Object,
+        _methodName: string,
+        descriptor: PropertyDescriptor
+    ): PropertyDescriptor => {
+        const originalDescriptorValue: Function = descriptor.value;
+
+        let isWaiting: boolean = false;
+        let lastArgs: any[];
+
+        function decorated(...args: any[]) {
+            if (isWaiting) {
+                lastArgs = args;
+                return;
+            }
+
+            originalDescriptorValue.apply(_target, args);
+            isWaiting = true;
+
+            setTimeout(() => {
+                isWaiting = false;
+                if (lastArgs.length) {
+                    decorated.apply(_target, lastArgs);
+                    lastArgs = [];
+                }
+            }, ms);
+        }
+
+        return {
+            ...descriptor,
+            value: decorated
+        }
+
+    }
+}
 
 
+/**
+ * checking
+ */
+var math = new MathLib();
 
+var i = 1;
+
+var interval = setInterval(() => {
+    math.areaOfCircle(i);
+    i++;
+}, 100);
+
+setTimeout(() => clearInterval(interval), 10000);
