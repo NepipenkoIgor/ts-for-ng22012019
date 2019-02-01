@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es6"
+    "target": "es6",
+    "removeComments": true                /* Do not emit comments to output. */
   },
   "include": [
     "./homework.ts"
