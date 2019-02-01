@@ -2,31 +2,25 @@
 //   Возвращает true, если все аргументы, кроме первого входят в первый.
 //   Первым всегда должен быть массив.
 
-function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
+type stringOrNumber = string | number;
+type primitive = stringOrNumber | boolean | null | undefined;
 
-    let inArray: boolean = false;
-
-    args.forEach((argItem: T): void => {
-        inArray = checkArr.includes(argItem);
-    });
-
-    return inArray;
+function isInArray(checkArr: primitive[], ...args: primitive[]): boolean {
+    return args.every((argument: primitive) => checkArr.includes(argument));
 }
 
 
 // 2) Написать функцию summator(), которая суммирует переданые ей аргументы.
 // Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
-type stringOrNumber = string | number;
 
 
 function summator(...args: stringOrNumber[]): stringOrNumber {
-    if (typeof args[0] === 'string') {
-        return args.join('');
-    } else {
         return args.reduce(
-            (prev: stringOrNumber, currentValue: stringOrNumber): number => Number(prev) + Number(currentValue)
+            (res: number, value: stringOrNumber): number => {
+                value = typeof (value) === 'string' ? parseFloat(value) : value;
+                return res + value;
+            }, 0
         );
-    }
 }
 
 // 3) Написать функцию getUnique(arr), которая принимает аргументом неограниченое число аргументов,
@@ -34,7 +28,7 @@ function summator(...args: stringOrNumber[]): stringOrNumber {
 // Порядок элементов результирующего массива должен совпадать с порядком,
 // в котором они встречаются в оригинальной структуре.
 
-function getUnique<T>(...args: T[]): T[] {
+function getUnique(...args: primitive[]): primitive[] {
     return [...new Set(args)];
 }
 
@@ -160,7 +154,7 @@ let ml: MathLib = new MathLib();
 
 let interval: number = setInterval(ml.sayHello, 100);
 
-setTimeout(function(): void {
+setTimeout(function (): void {
     clearInterval(interval);
 }, 5000);
 
