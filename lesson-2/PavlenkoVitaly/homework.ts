@@ -23,7 +23,7 @@ function summator(...args: stringOrNumber[]): stringOrNumber {
     if (typeof args[0] === 'number') {
         let sum: number = 0;
         // TODO: не понимаю, как это исправить
-        args.forEach((item: number) => {
+        args.forEach((item: stringOrNumber) => {
             sum += item;
         });
         return sum;

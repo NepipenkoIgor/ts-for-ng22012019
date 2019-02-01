@@ -20,7 +20,9 @@ function isInArray(arr: stringOrNumber[], ...targets: stringOrNumber[]): boolean
 function summator(...args: stringOrNumber[]): number {
     return args.reduce(
         (res: number, value: stringOrNumber): number => {
-            value = typeof (value) === 'string' ? parseFloat(value) : value;
+            value = typeof (value) === 'string'
+                ? parseFloat(value)
+                : value;
             return res + value;
         }, 0
     );
@@ -34,10 +36,11 @@ function summator(...args: stringOrNumber[]): number {
  в котором они встречаются в оригинальной структуре.
  */
 
-function getUnique(...args: stringOrNumber[]) : stringOrNumber[] {
-    return args.filter((item, i, args) =>  {
-        return i === args.indexOf(item)
-    });
+function getUnique(...args: stringOrNumber[]): stringOrNumber[] {
+    return [...new Set([...args])];
+    // return args.filter((item: stringOrNumber, i: number, _args: stringOrNumber[]) => {
+    //     return i === _args.indexOf(item);
+    // });
 }
 
 
@@ -50,10 +53,12 @@ function getUnique(...args: stringOrNumber[]) : stringOrNumber[] {
  */
 
 function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
-    let matrix : stringOrNumber[][] = [];
+    const matrix: stringOrNumber[][] = [];
 
-    data.forEach((_value, index) => {
-        if (index % rowSize !== 0) return;
+    data.forEach((_value: stringOrNumber, index: number) => {
+        if (index % rowSize !== 0) {
+            return;
+        }
         matrix.push(data.slice(index, index + rowSize));
     });
 
@@ -68,9 +73,9 @@ function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
 
 class MathLib {
 
-    // @debounce(1000)
+    @debounce(1000)
     @throttle(2000)
-    public areaOfCircle(r: number) {
+    public areaOfCircle(r: number): void {
         console.log(Math.PI * r ** 2);
     }
 
@@ -84,9 +89,9 @@ function debounce(ms: number) {
     ): PropertyDescriptor => {
         const originalDescriptorValue: Function = descriptor.value;
 
-        let timer :any = null;
+        let timer: number | null = null;
 
-        function decorated(...args: any[])  {
+        function decorated(...args: any[]): void {
             if (timer) {
                 clearTimeout(timer);
             }
@@ -101,7 +106,7 @@ function debounce(ms: number) {
             ...descriptor,
             value: decorated
         };
-    }
+    };
 }
 
 
@@ -150,13 +155,13 @@ function throttle(ms: number) {
 /**
  * checking
  */
-var math = new MathLib();
-
-var i = 1;
-
-var interval = setInterval(() => {
-    math.areaOfCircle(i);
-    i++;
-}, 100);
-
-setTimeout(() => clearInterval(interval), 10000);
+// var math = new MathLib();
+//
+// var i = 1;
+//
+// var interval = setInterval(() => {
+//     math.areaOfCircle(i);
+//     i++;
+// }, 100);
+//
+// setTimeout(() => clearInterval(interval), 10000);

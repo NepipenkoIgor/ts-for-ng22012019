@@ -6,7 +6,7 @@ type sn = string | number;
 
 function isInArray<sn>(arr: sn[], ...args: sn[]): boolean {
     const result = [];
-    args.map((arg: sn) => {
+    args.forEach((arg: sn) => {
         if (arr.includes(arg)) {
             result.push(arg);
         }
@@ -22,7 +22,7 @@ console.log(isInArray(['cat', 'dog', 'bat'], 'cat'));
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 
 function summator(...args: number[]): number {
-    return Array.from(args).reduce((acc: number, currVal: number) => acc + currVal);
+    return args.reduce((acc: number, currVal: number) => acc + currVal);
 }
 
 console.log(summator(1,2,3,4));
