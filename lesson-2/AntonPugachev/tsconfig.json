@@ -1,9 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es6"
+    "target": "es2017",
+    "lib": ["es5","es2015","es2016.array.include","dom"],
+    "inlineSourceMap": true, // this line
+    "sourceMap": false // and this one
   },
   "include": [
-    "./homework.ts"
+    "./homework.ts",
+    "./homework.spec.ts"
   ]
 }

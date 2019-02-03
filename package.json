@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "npx ts-node lesson-2/AntonPugachev/homework.ts"
+    "test": "npx karma start lesson-2/AntonPugachev/karma.conf.js",
+    "run": "npx ts-node --project lesson-2/AntonPugachev/tsconfig.json lesson-2/AntonPugachev/homework.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jasmine": "^3.3.8",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-typescript": "^3.0.13",
+    "ts-loader": "^5.3.3",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
-    "typescript": "^3.2.4"
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   }
 }
