@@ -4,27 +4,26 @@
 
 type sn = string | number;
 
-function isInArray<sn>(arr: sn[], ...args: sn[]): boolean {
-    const result = [];
-    args.forEach((arg: sn) => {
-        if (arr.includes(arg)) {
-            result.push(arg);
-        }
-    });
-    return result.length !== 0;
+function isInArray(arr: sn[], ...args: sn[]): boolean {
+    return args.every((elem: sn) => arr.includes(elem));
 }
 
 console.log(isInArray([1, 2, 3], 2));
-console.log(isInArray(['cat', 'dog', 'bat'], 'cat'));
+console.log(isInArray([1, 2, 3], 2,6,9,40));
+console.log(isInArray(['cat', 'dog', 'bat'], 'po'));
 
 
 //  Написать функцию summator(), которая суммирует переданые ей аргументы.
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 
-function summator(...args: number[]): number {
-    return args.reduce((acc: number, currVal: number) => acc + currVal);
+function summator(...args: sn[]): number {
+    return args.reduce((acc: number, currVal: sn) => {
+        if (typeof currVal === 'string') {
+            currVal = parseFloat(currVal);
+        }
+        return acc + currVal;
+    }, 0);
 }
-
 console.log(summator(1,2,3,4));
 
 
@@ -33,14 +32,8 @@ console.log(summator(1,2,3,4));
 // Порядок элементов результирующего массива должен совпадать с порядком,
 // в котором они встречаются в оригинальной структуре.
 
-function getUnique<sn>(...args: sn[]) {
-    const newArgs: sn[] = [];
-    args.map((arg: sn) => {
-        if (!newArgs.includes(arg)) {
-            newArgs.push(arg);
-        }
-    });
-    return newArgs;
+function getUnique<sn>(...args: sn[]): sn[] {
+    return [...new Set([...args])];
 }
 
 console.log(getUnique(2,8,2,9,6,2,5,9,4));
@@ -51,20 +44,16 @@ console.log(getUnique('a', 'b', 'a', 'c', 'b'));
 // элементы подмассивов беруться из массива data.
 // Оригинальный массив не должен быть изменен.
 
-// ЕЩЕ НЕ РАБОТАЕТ КАК ОЖИДАЕТСЯ
+function toMatrix(data: sn[], rowSize: number): sn[][] {
+    const matrix: sn[][] = [];
 
-type arr = number[];
-
-function toMatrix(data: number[], rowSize: number): arr {
-    const copyOfData = data;
-    const newArr: number[] = [];
-
-    copyOfData.length = rowSize;
-    for (const elem of copyOfData) {
-        newArr.push(elem);
-    }
-    return newArr;
-
+    data.forEach((_elem: sn, index: number) => {
+        if (index % rowSize !== 0) {
+            return;
+        }
+        matrix.push(data.slice(index, index + rowSize));
+    });
+    return matrix;
 }
 
 console.log(toMatrix([1,2,3,4,5,6,7], 3));
