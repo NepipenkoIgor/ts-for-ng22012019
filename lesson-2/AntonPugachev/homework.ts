@@ -11,6 +11,7 @@ function isInArray(arr: customType[], ...args: customType[]): boolean {
         return arr.includes(item);
     });
 }
+
 /**
  2) Написать функцию summator(), которая суммирует переданые ей аргументы.
  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
@@ -21,10 +22,14 @@ function isString(val: stringOrNumber): val is string {
 }
 
 function summator(..._args: stringOrNumber[]): number {
-    return _args.reduce<number>((sum: number, item: stringOrNumber) => {
-        return sum + (isString(item) ? Number(item) : item);
-    }, 0);
+        return _args.reduce<number>((sum: number, item: stringOrNumber) => {
+            if (isNaN(Number(item)) || item === null) {
+                throw ('не верный тип');
+            }
+            return sum + (isString(item) ? Number(item) : item);
+        }, 0);
 }
+
 /**
  3)Написать функцию getUnique(arr), которая принимает аргументом неограниченое число аргументов,
  и возвращает массив уникальных элементов. Аргумент не должен изменяться.
@@ -38,6 +43,7 @@ function getUnique(...args: stringOrNumber[]): stringOrNumber[] {
     });
     return result;
 }
+
 /**
  4)Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
  возвращает новый массив. Число показывает количество элементов в подмассивах,
@@ -76,30 +82,26 @@ function toMatrix(data: customType[], rowSize: number): customType[][] {
 // }
 
 // —-------------------------------------------------------------------------------------------—
- export class Homework {
-   // @logMethod1
+export class Homework {
+    // @logMethod1
     // public isInArray(arr: customType[], ...args: customType[]): boolean {
     //     return args.every((item: customType) => {
     //         return arr.includes(item);
     //     });
     // }
- public _isInArray: Function = isInArray;
- public _summator: Function = summator;
- public _getUnique: Function = getUnique;
- public _toMatrix: Function = toMatrix;
+    public _isInArray: Function = isInArray;
+    public _summator: Function = summator;
+    public _getUnique: Function = getUnique;
+    public _toMatrix: Function = toMatrix;
 }
 
-const newHomework: Homework = new Homework();
+// const newHomework: Homework = new Homework();
 
-console.log('задание 1');
-console.log(newHomework._isInArray([1, 2, 3, ''], '1', 1, 2, 3));
-console.log('задание 2');
-console.log(newHomework._summator('1', 1, 2, 3));
-console.log('задание 3');
-console.log(newHomework._getUnique(2, '3', 1, 1, 1, 7, 1, 1, 2, 2, 2, 2));
-console.log('задание 4');
-console.log(newHomework._toMatrix([1, 2, true, 4, 5, 6, 7], 4));
-
-/**5)* https://learn.javascript.ru/task/debounce*/
-
-/** 6)* https://learn.javascript.ru/task/throttle*/
+// console.log('задание 1');
+// console.log(newHomework._isInArray([null, 2, 3, ''], null));
+// console.log('задание 2');
+// console.log(newHomework._summator('1', 'asd', 2, 3));
+// console.log('задание 3');
+// console.log(newHomework._getUnique(2, '3', 1, 1, 1, 7, 1, 1, 2, 2, 2, 2));
+// console.log('задание 4');
+// console.log(newHomework._toMatrix([1, 2, true, 4, 5, 6, 7], 4));
