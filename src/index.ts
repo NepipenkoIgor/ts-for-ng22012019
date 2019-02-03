@@ -1,4 +1,4 @@
-let a: number = 1;
-let b: number = 3;
-console.log(a + b);
-console.log(a - b);
+let aa: number = 1;
+let bb: number = 3;
+console.log(aa + bb);
+console.log(aa - bb);

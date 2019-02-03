@@ -4,19 +4,19 @@
 
 type sn = string | number;
 
-function isInArray(arr: sn[], ...args: sn[]): boolean {
+export function isInArray(arr: sn[], ...args: sn[]): boolean {
     return args.every((elem: sn) => arr.includes(elem));
 }
 
 console.log(isInArray([1, 2, 3], 2));
-console.log(isInArray([1, 2, 3], 2,6,9,40));
+console.log(isInArray([1, 2, 3], 2, 6, 9, 40));
 console.log(isInArray(['cat', 'dog', 'bat'], 'po'));
 
 
 //  Написать функцию summator(), которая суммирует переданые ей аргументы.
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
-
-function summator(...args: sn[]): number {
+//
+export function summator(...args: sn[]): number {
     return args.reduce((acc: number, currVal: sn) => {
         if (typeof currVal === 'string') {
             currVal = parseFloat(currVal);
@@ -31,9 +31,9 @@ console.log(summator(1,2,3,4));
 // и возвращает массив уникальных элементов. Аргумент не должен изменяться.
 // Порядок элементов результирующего массива должен совпадать с порядком,
 // в котором они встречаются в оригинальной структуре.
-
-function getUnique<sn>(...args: sn[]): sn[] {
-    return [...new Set([...args])];
+//
+export function getUnique<sn>(...args: sn[]): sn[] {
+    return [...new Set<sn>([...args])];
 }
 
 console.log(getUnique(2,8,2,9,6,2,5,9,4));
@@ -43,8 +43,8 @@ console.log(getUnique('a', 'b', 'a', 'c', 'b'));
 // возвращает новый массив. Число показывает количество элементов в подмассивах,
 // элементы подмассивов беруться из массива data.
 // Оригинальный массив не должен быть изменен.
-
-function toMatrix(data: sn[], rowSize: number): sn[][] {
+//
+export function toMatrix(data: sn[], rowSize: number): sn[][] {
     const matrix: sn[][] = [];
 
     data.forEach((_elem: sn, index: number) => {
@@ -55,5 +55,5 @@ function toMatrix(data: sn[], rowSize: number): sn[][] {
     });
     return matrix;
 }
-
-console.log(toMatrix([1,2,3,4,5,6,7], 3));
+console.log(toMatrix(['true', 'true', 'false'], 2));
+console.log(toMatrix([1, 2, 3, 4, 5, 6, 7], 3));

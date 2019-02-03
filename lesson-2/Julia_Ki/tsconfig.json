@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2016","dom","es2016.array.include"],
+    "target": "es2016",
+    "noImplicitThis": false
+  },
+  "include": [
+    "./homework.ts",
+    "./homework.spec.ts"
+  ]
+}
