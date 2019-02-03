@@ -66,15 +66,17 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 // debounce
 
 function debounce(ms: number): Function {
-    return (target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
+    // tslint:disable-next-line:no-any
+    return (target: any, _propertyName: string, descriptor: PropertyDescriptor): void => {
         const method: Function = descriptor.value;
         let timer: number | null;
 
-        descriptor.value = (...args: any[]) => {
-            const onComlete = () => {
+        // tslint:disable-next-line:no-any
+        descriptor.value = (...args: any[]): void => {
+            const onComlete: Function = (): void => {
                 method.apply(target, args);
                 timer = null;
-            }
+            };
 
             if (timer) {
                 clearTimeout(timer);
@@ -82,20 +84,21 @@ function debounce(ms: number): Function {
 
             timer = setTimeout(onComlete, ms);
         };
-        
-    }
+    };
 }
 
 // class Dog {
-//     private name = 'Good boy';
+//     private name: string = 'Good boy';
 
 //     @debounce(1500)
-//     public woof(text: string) {
+//     public woof(text: string): void {
+//         // tslint:disable-next-line:no-console
 //         console.log(`I am a ${this.name}, ${text}`);
 //     }
 // }
 
-// const dog = new Dog();
+// const dog: Dog = new Dog();
+// // tslint:disable-next-line:no-console
 // console.log('start');
 // dog.woof('hi1');
 // dog.woof('hi2');
