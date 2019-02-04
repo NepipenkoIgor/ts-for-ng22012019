@@ -5,6 +5,7 @@
     "noImplicitThis": false
   },
   "include": [
-    "./homework.ts"
+    "./homework.ts",
+    "./homework.spec.ts"
   ]
 }
