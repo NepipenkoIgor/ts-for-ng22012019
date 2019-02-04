@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2018",
+    //"lib": ["es5", "es6", "es2016.array.include"],
+    "removeComments": true,                /* Do not emit comments to output. */
+    "downlevelIteration": true
+  },
+  "include": [
+    "./homework.ts"
+  ]
+}
