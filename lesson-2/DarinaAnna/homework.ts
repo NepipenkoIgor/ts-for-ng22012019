@@ -1,5 +1,5 @@
 type stringOrNumber = string | number;
-type primitive = string | number | boolean | null | undefined;
+type primitive = stringOrNumber | boolean | null | undefined;
 
 // 1)
 // Написать функцию isInArray(), которая начиная со второго принимает переменное количество аргументов.
@@ -16,7 +16,7 @@ function isInArray(array: primitive[], ...arg: primitive[]): boolean {
     return result;
 }
 
-console.log(isInArray([1, 2, 'one'], 1, 'one'));
+// console.log(isInArray([1, 2, 'one'], 1, 'one'));
 
 // 2)
 // Написать функцию summator(), которая суммирует переданые ей аргументы.
@@ -32,19 +32,18 @@ function summator(...args: stringOrNumber[]): number {
     }, 0);
 }
 
-console.log(summator('10', 2, 12));
-
+// console.log(summator('10', 2, 12));
 
 // 3)
 // Написать функцию getUnique(arr), которая принимает аргументом неограниченое число аргументов,
 // и возвращает массив уникальных элементов. Аргумент не должен изменяться.
 // Порядок элементов результирующего массива должен совпадать с порядком,
 // в котором они встречаются в оригинальной структуре.
-function getUnique(...array: primitive[]): primitive[] {
-    return array.filter((value: primitive, index: number) => array.indexOf(value) === index);
+function getUnique(array: primitive[]): primitive[] {
+    return array.filter(((value: primitive, index: number): primitive => array.indexOf(value) === index));
 }
 
-console.log(getUnique(1, 2, 3, 1, 2, 22, '2', '3', 12, '13', '45', 12));
+// console.log(getUnique(1, 2, 3, 1, 2, 22, '2', '3', 12, '13', '45', 12));
 
 // 4)
 // Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
@@ -59,4 +58,5 @@ function toMatrix(data: primitive[], rowSize: number): primitive[][] {
     return newArray;
 }
 
-console.log(toMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 3));
+// console.log(toMatrix([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 3));
+export {isInArray, summator, toMatrix, getUnique};
