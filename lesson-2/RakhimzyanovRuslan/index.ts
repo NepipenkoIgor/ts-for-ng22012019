@@ -22,7 +22,7 @@ export function isInArray(array: Primitive[], ...args: Primitive[]): boolean {
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 
 export function summator(...args: StringOrNumb[]): number {
-    return args.reduce<number>((acc: number, arg: StringOrNumb) => acc + +arg, 0);
+    return args.reduce<number>((acc: number, arg: StringOrNumb) => acc + Number(arg), 0);
 }
 
 // console.log(summator(1, 2, '3', 4));
