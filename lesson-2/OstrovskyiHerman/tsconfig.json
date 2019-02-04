@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es5","dom","es2016.array.include"],
+    "noImplicitThis": false
+  },
+  "include": [
+    "./homework.ts",
+    "./homework.spec.ts"
+  ]
+}
