@@ -8,9 +8,11 @@ function isInArray<T>(arr: T[], ...args: T[]): boolean {
     let result: boolean = true;
 
     args.forEach(element => {
-        if (arr.indexOf(element) < 0) result = false;
+        if (arr.indexOf(element) < 0) {
+            result = false;
+        }
     });
-    
+
     return result;
 }
 
@@ -33,7 +35,7 @@ function summator(...args: stringOrNumber[]): stringOrNumber {
             isNaN(+element) ? result += 0 : result += +element;
         }
     });
-    
+
     return result;
 }
 
@@ -54,7 +56,7 @@ function getUnique(...args: G[]): G[] {
     args.forEach(element => {
         if (result.indexOf(element) < 0) result.push(element);
     });
-    
+
     return result;
 }
 
@@ -72,24 +74,24 @@ function toMatrix(data: G[], rowSize: number): M[] {
     let result:  Array<M> = [],
         row:     Array<G> = [],
         counter: number = 0;
-
-    if (rowSize > 0) {
-
-        data.forEach(element => {
-            if (counter < rowSize) {
-                row.push(element);
-                counter++;
-            } else {
-                result.push(row);
-                row = [];
-                row.push(element);
-                counter = 1;
-            }
-        });
-        
-        result.push(row);
+    if (rowSize <= 0) {
+     return  result;
     }
-    
+
+    data.forEach(element => {
+        if (counter < rowSize) {
+            row.push(element);
+            counter++;
+        } else {
+            result.push(row);
+            row = [];
+            row.push(element);
+            counter = 1;
+        }
+    });
+
+    result.push(row);
+
     return result;
 }
 
