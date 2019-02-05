@@ -7,6 +7,7 @@
   },
   "include": [
     "./homework.ts",
-    "./homework.spec.ts"
+    "./homework.spec.ts",
+    "src/**/*.ts"
   ]
 }
