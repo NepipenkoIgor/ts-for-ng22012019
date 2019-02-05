@@ -1,4 +1,4 @@
-import { isInArray, summator, getUnique, toMatrix } from './homework';
+import { getUnique, isInArray, summator, toMatrix } from './homework';
 
 describe('Testing isInArray', () => {
     it('#isInArray should return true on valid args', () => {
