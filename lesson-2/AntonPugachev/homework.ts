@@ -21,13 +21,18 @@ function isString(val: stringOrNumber): val is string {
     return typeof val === 'string';
 }
 
-function summator(..._args: stringOrNumber[]): number {
+function summator(..._args: stringOrNumber[]): number|null {
+    try {
         return _args.reduce<number>((sum: number, item: stringOrNumber) => {
             if (isNaN(Number(item)) || item === null) {
-                throw ('не верный тип');
+                throw new Error('не верный тип');
             }
             return sum + (isString(item) ? Number(item) : item);
         }, 0);
+    } catch (e) {
+        console.log(e.message);
+        return null;
+    }
 }
 
 /**
@@ -95,13 +100,13 @@ export class Homework {
     public _toMatrix: Function = toMatrix;
 }
 
-// const newHomework: Homework = new Homework();
+const newHomework: Homework = new Homework();
 
-// console.log('задание 1');
-// console.log(newHomework._isInArray([null, 2, 3, ''], null));
-// console.log('задание 2');
-// console.log(newHomework._summator('1', 'asd', 2, 3));
-// console.log('задание 3');
-// console.log(newHomework._getUnique(2, '3', 1, 1, 1, 7, 1, 1, 2, 2, 2, 2));
-// console.log('задание 4');
-// console.log(newHomework._toMatrix([1, 2, true, 4, 5, 6, 7], 4));
+console.log('задание 1');
+console.log(newHomework._isInArray([null, 2, 3, ''], 1));
+console.log('задание 2');
+console.log(newHomework._summator('1', 'asd', 2, 3));
+console.log('задание 3');
+console.log(newHomework._getUnique(2, '3', 1, 1, 1, 7, 1, 1, 2, 2, 2, 2));
+console.log('задание 4');
+console.log(newHomework._toMatrix([1, 2, true, 4, 5, 6, 7], 4));

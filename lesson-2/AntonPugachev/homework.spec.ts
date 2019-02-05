@@ -26,13 +26,11 @@ describe('test summator --- ', () => {
     it('проверка смешанные типы  -  false', () => {
         expect(HW._summator('1', 1, 2, 3)).toEqual(7);
     });
-    /* todo:  не работает проверка на ошибки*/
-    const error: Error = new Error('не верный тип');
     it('проверка на  null - error', () => {
-        expect(HW._summator('1', null, 2, 3)).toThrowError('не верный тип');
+        expect(HW._summator('1', null, 2, 3)).toEqual(null);
     });
     it('проверка на не число - error', () => {
-        expect(HW._summator('1', '!!!', 2, 3)).toEqual(error);
+        expect(HW._summator('1', '!!!', 2, 3)).toEqual(null);
     });
 
 });
