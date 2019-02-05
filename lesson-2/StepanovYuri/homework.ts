@@ -1,7 +1,7 @@
 // 1
 type primitive = string | number | boolean;
 
-function isInArray(arr: primitive[], ...rest: primitive[]): boolean {
+export function isInArray(arr: primitive[], ...rest: primitive[]): boolean {
   /* for (let i: number = 0; i < rest.length; i++) {
     // console.log(rest[i]);
     if (!(arr.indexOf(rest[i]) + 1)) { return false; }
@@ -18,7 +18,7 @@ function isInArray(arr: primitive[], ...rest: primitive[]): boolean {
 // 2
 type stringOrNumber = string | number;
 
-function summator(...rest: stringOrNumber[]): number {
+export function summator(...rest: stringOrNumber[]): number {
   return rest.reduce((prev: number, current: stringOrNumber) => {
     if (typeof current === 'string') {
       return parseInt(current) + prev;
@@ -31,7 +31,7 @@ function summator(...rest: stringOrNumber[]): number {
 // console.log(summator('11', 2, '3')); // 16
 
 // 3
-function getUnique(...arr: stringOrNumber[]): stringOrNumber[] {
+export function getUnique(...arr: stringOrNumber[]): stringOrNumber[] {
   return arr.filter((value: stringOrNumber, index: number, array: stringOrNumber[]) => {
     return array.indexOf(value) === index;
   });
@@ -41,7 +41,7 @@ function getUnique(...arr: stringOrNumber[]): stringOrNumber[] {
 // console.log(getUnique(1, 2, 3, 1, '2', '3'));
 
 // 4
-function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
+export function toMatrix(data: stringOrNumber[], rowSize: number): stringOrNumber[][] {
   const result: stringOrNumber[][] = [];
 
   for (let i: number = 0; i < data.length; i += rowSize) {

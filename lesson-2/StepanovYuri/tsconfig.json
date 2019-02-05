@@ -4,6 +4,7 @@
     "target": "es6"
   },
   "include": [
-    "./homework.ts"
+    "./homework.ts",
+    "./homework.spec.ts"
   ]
 }
