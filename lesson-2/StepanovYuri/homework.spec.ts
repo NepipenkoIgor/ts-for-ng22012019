@@ -20,8 +20,12 @@ describe('Test summator', () => {
         expect(summator(1, 3, '6')).toBe(10);
     });
 
-    it('Should return 6 with only one string argument', () => {
-        expect(summator('6')).toBe(6);
+    it('Should return 16', () => {
+        expect(summator('11', 2, '3')).toBe(10);
+    });
+
+    it('Should return only one argument 3', () => {
+        expect(summator('3')).toBe(3);
     });
 });
 
