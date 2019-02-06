@@ -1,59 +1,51 @@
-//   1) Написать функцию isInArray(), которая начиная со второго принимает переменное количество аргументов.
-//   Возвращает true, если все аргументы, кроме первого входят в первый.
-//   Первым всегда должен быть массив.
+// //   1) Написать функцию isInArray(), которая начиная со второго принимает переменное количество аргументов.
+// //   Возвращает true, если все аргументы, кроме первого входят в первый.
+// //   Первым всегда должен быть массив.
+//
+type stringOrNumber = string | number;
+type primitive = stringOrNumber | boolean | null | undefined;
 
-export function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
-
-    // let inArray: boolean = false;
-    //
-    // args.forEach((argItem: T): void => {
-    //     inArray = checkArr.includes(argItem);
-    // });
-    //
-    // return inArray;
-
-    return args.every((argItem: T) => checkArr.includes(argItem));
+export function isInArray(checkArr: primitive[], ...args: primitive[]): boolean {
+    return args.every((argument: primitive) => checkArr.includes(argument));
 }
-
-
-// 2) Написать функцию summator(), которая суммирует переданые ей аргументы.
-// Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
-// type stringOrNumber = string | number;
 //
 //
-// function summator(...args: stringOrNumber[]): stringOrNumber {
-//     if (typeof args[0] === 'string') {
-//         return args.join('');
-//     } else {
-//         return args.reduce(
-//             (prev: stringOrNumber, currentValue: stringOrNumber): number => Number(prev) + Number(currentValue)
-//         );
-//     }
-// }
+// // 2) Написать функцию summator(), которая суммирует переданые ей аргументы.
+// // Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
+//
+//
+export function summator(...args: stringOrNumber[]): stringOrNumber {
+    return args.reduce(
+        (res: number, value: stringOrNumber): number => {
+            value = typeof (value) === 'string' ? parseFloat(value) : value;
+            return res + value;
+        }, 0
+    );
+}
 //
 // // 3) Написать функцию getUnique(arr), которая принимает аргументом неограниченое число аргументов,
 // // и возвращает массив уникальных элементов. Аргумент не должен изменяться.
 // // Порядок элементов результирующего массива должен совпадать с порядком,
 // // в котором они встречаются в оригинальной структуре.
 //
-// function getUnique<T>(...args: T[]): T[] {
-//     return [...new Set(args)];
-// }
+export function getUnique(...args: primitive[]): primitive[] {
+    return [...new Set(args)];
+}
 //
 // // 4) Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
 // // возвращает новый массив. Число показывает количество элементов в подмассивах,
 // // элементы подмассивов беруться из массива data.
 // // Оригинальный массив не должен быть изменен.
 //
-// function toMatrix<T>(data: T[], rowSize: number): T[][] {
-//     return data.map((elem: T): T[] => {
-//         const rowArr: T[] = [];
-//         for (let i: number = 0; i < rowSize; i++) {
-//             rowArr.push(elem);
-//         }
-//         return rowArr;
-//     });
-// }
+export function toMatrix<T>(data: T[], rowSize: number): T[][] {
+    return data.map((elem: T): T[] => {
+        const rowArr: T[] = [];
+        for (let i: number = 0; i < rowSize; i++) {
+            rowArr.push(elem);
+        }
+        return rowArr;
+    });
+}
 //
 // // 5) https://learn.javascript.ru/task/debounce
 //
@@ -69,7 +61,7 @@ export function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
 //         };
 //     };
 // }
-//
+
 // function debounce(f: Function, ms: number): Function {
 //
 //     let timer: number | null = null;
@@ -90,8 +82,6 @@ export function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
 //         timer = setTimeout(onComplete, ms);
 //     };
 // }
-//
-//
 // // 6) https://learn.javascript.ru/task/throttle
 //
 // function throttleMethod(timer: number = 500): Function {
@@ -138,7 +128,7 @@ export function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
 //
 //     return wrapper;
 // }
-//
+// //
 //
 // class MathLib {
 //     @throttleMethod(1000)
@@ -156,15 +146,16 @@ export function isInArray<T>(checkArr: T[], ...args: T[]): boolean {
 //     }
 // }
 //
+// // tslint:disable-next-line
+// const aoc: MathLib = new MathLib();
+// aoc.areaOfCircle(5);
+// const ml: MathLib = new MathLib();
 //
-// let aoc: number = new MathLib().areaOfCircle(5);
-// let ml: MathLib = new MathLib();
+// const interval: number = setInterval(ml.sayHello, 100);
 //
-// let interval: number = setInterval(ml.sayHello, 100);
-//
-// setTimeout(function(): void {
+// setTimeout(function (): void {
 //     clearInterval(interval);
 // }, 5000);
-//
-// // RUN in terminal:
-// // npx ts-node --project lesson-2/OstrovskyiHerman/tsconfig.json  lesson-2/OstrovskyiHerman/homework.ts
+// //
+// // // RUN in terminal:
+// // // npx ts-node --project lesson-2/OstrovskyiHerman/tsconfig.json  lesson-2/OstrovskyiHerman/homework.ts

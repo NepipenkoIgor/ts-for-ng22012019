@@ -1,8 +1,8 @@
 
 // Используйте то что увидели на занятии
 // Никаких any , обобщите аргументы на примитивы
-type StringOrNumb = string | number;
-type Primitive = StringOrNumb | boolean;
+export type StringOrNumb = string | number;
+export type Primitive = StringOrNumb | boolean;
 
 
 // 1)
@@ -10,7 +10,7 @@ type Primitive = StringOrNumb | boolean;
 // Возвращает true, если все аргументы, кроме первого входят в первый.
 // Первым всегда должен быть массив.
 
-function isInArray(array: Primitive[], ...args: Primitive[]): boolean {
+export function isInArray(array: Primitive[], ...args: Primitive[]): boolean {
     return args.every((arg: Primitive) => array.includes(arg));
 }
 
@@ -21,8 +21,8 @@ function isInArray(array: Primitive[], ...args: Primitive[]): boolean {
 //  Написать функцию summator(), которая суммирует переданые ей аргументы.
 //  Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
 
-function summator(...args: StringOrNumb[]): number {
-    return args.reduce<number>((acc: number, arg: StringOrNumb) => acc + +arg, 0);
+export function summator(...args: StringOrNumb[]): number {
+    return args.reduce<number>((acc: number, arg: StringOrNumb) => acc + Number(arg), 0);
 }
 
 // console.log(summator(1, 2, '3', 4));
@@ -34,7 +34,7 @@ function summator(...args: StringOrNumb[]): number {
 //   Порядок элементов результирующего массива должен совпадать с порядком,
 //   в котором они встречаются в оригинальной структуре.
 
-function getUnique(array: Primitive[]): Primitive[] {
+export function getUnique(array: Primitive[]): Primitive[] {
     return array.filter((value: Primitive, index: number, arr: Primitive[]) => arr.indexOf(value) === index);
 }
 
@@ -47,7 +47,7 @@ function getUnique(array: Primitive[]): Primitive[] {
 //  элементы подмассивов беруться из массива data.
 //  Оригинальный массив не должен быть изменен.
 
-function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
+export function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
     const result: Primitive[][] = [];
     data.forEach((value: Primitive, index: number) => {
         if (index % rowSize === 0) { // создаем новый подмассив
@@ -65,37 +65,40 @@ function toMatrix(data: Primitive[], rowSize: number): Primitive[][] {
 // 5)*
 // debounce
 
-function debounce(ms: number): Function {
-    return (target: any, _propertyName: string, descriptor: PropertyDescriptor) => {
-        const method: Function = descriptor.value;
-        let timer: number | null;
+// function debounce(ms: number): Function {
+//     // tslint:disable-next-line:no-any
+//     return (target: any, _propertyName: string, descriptor: PropertyDescriptor): void => {
+//         const method: Function = descriptor.value;
+//         let timer: number | null;
 
-        descriptor.value = (...args: any[]) => {
-            const onComlete = () => {
-                method.apply(target, args);
-                timer = null;
-            }
+//         // tslint:disable-next-line:no-any
+//         descriptor.value = (...args: any[]): void => {
+//             const onComlete: Function = (): void => {
+//                 method.apply(target, args);
+//                 timer = null;
+//             };
 
-            if (timer) {
-                clearTimeout(timer);
-            }
+//             if (timer) {
+//                 clearTimeout(timer);
+//             }
 
-            timer = setTimeout(onComlete, ms);
-        };
-        
-    }
-}
+//             timer = setTimeout(onComlete, ms);
+//         };
+//     };
+// }
 
 // class Dog {
-//     private name = 'Good boy';
+//     private name: string = 'Good boy';
 
 //     @debounce(1500)
-//     public woof(text: string) {
+//     public woof(text: string): void {
+//         // tslint:disable-next-line:no-console
 //         console.log(`I am a ${this.name}, ${text}`);
 //     }
 // }
 
-// const dog = new Dog();
+// const dog: Dog = new Dog();
+// // tslint:disable-next-line:no-console
 // console.log('start');
 // dog.woof('hi1');
 // dog.woof('hi2');
