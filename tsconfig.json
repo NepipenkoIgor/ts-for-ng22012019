@@ -23,7 +23,7 @@
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
     /* Strict Type-Checking Options */
     "noEmitOnError": true,
-    "strict": true,
+    "strict": false,
     /* Enable all strict type-checking options. */
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": false,              /* Enable strict null checks. */
@@ -62,8 +62,8 @@
     /* Enables experimental support for ES7 decorators. */
     "emitDecoratorMetadata": true
     /* Enables experimental support for emitting type metadata for decorators. */
-  }
-  //"include": [
-  //  "src/**/*.ts"
-  //]
+  },
+  "include": [
+    "lesson-4/lesson-4.ts"
+  ]
 }
