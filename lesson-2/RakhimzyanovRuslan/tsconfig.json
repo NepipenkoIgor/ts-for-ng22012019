@@ -2,5 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es2018"
-  }
+  },
+  "include": [
+    "./index.ts",
+    "./index.spec.ts"
+  ]
 }
