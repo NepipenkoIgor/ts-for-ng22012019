@@ -22,8 +22,9 @@
     // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
     /* Strict Type-Checking Options */
-    "noEmitOnError": true, // не создавать js при ошибках
-    "strict": true,
+
+    "noEmitOnError": true,
+    "strict": false,
     /* Enable all strict type-checking options. */
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": false,              /* Enable strict null checks. */
@@ -63,7 +64,7 @@
     "emitDecoratorMetadata": true
     /* Enables experimental support for emitting type metadata for decorators. */
   },
-  // "include": [
-  //   "src/**/*.ts"
-  // ]
+  "include": [
+    "lesson-4/lesson-4.ts"
+  ]
 }
