@@ -189,7 +189,7 @@ import { delay, retryWhen } from 'rxjs/operators';
 //     .pipe(map(({ changedTouches }: TouchEvent) => changedTouches[0].clientX));
 //
 //
-// const swipe$: Observable<[number, number]> = zip(touchStart$, touchEnd$)
+// const swipe$: Observable<[number, number]> = zip(tonpuchStart$, touchEnd$)
 //
 // swipe$.subscribe(([startX, endX]: [number, number]) => {
 //     console.log('subscribe 1 ===>', startX - endX);
