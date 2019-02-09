@@ -65,6 +65,7 @@
     /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": [
-    "lesson-4/lesson-4.ts"
+    "lesson-4/lesson-4.ts",
+    "lesson-3/lesson-3.ts"
   ]
 }

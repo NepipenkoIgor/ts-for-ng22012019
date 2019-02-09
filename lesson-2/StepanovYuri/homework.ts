@@ -19,7 +19,7 @@ export function isInArray(arr: primitive[], ...rest: primitive[]): boolean {
 type stringOrNumber = string | number;
 
 export function summator(...rest: stringOrNumber[]): number {
-  return rest.reduce((prev: number, current: stringOrNumber) => {
+  return rest.reduce<number>((prev: number, current: stringOrNumber) => {
     if (typeof current === 'string') {
       return parseInt(current) + prev;
     } else {

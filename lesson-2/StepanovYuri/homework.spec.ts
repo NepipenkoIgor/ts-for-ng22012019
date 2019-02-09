@@ -21,7 +21,7 @@ describe('Test summator', () => {
     });
 
     it('Should return 16', () => {
-        expect(summator('11', 2, '3')).toBe(10);
+        expect(summator('11', 2, '3')).toBe(16);
     });
 
     it('Should return only one argument 3', () => {
