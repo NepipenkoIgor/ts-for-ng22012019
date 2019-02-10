@@ -423,7 +423,7 @@ import { from } from 'rxjs';
 //                promise 1
 //                promise 2
 
-console.log('Start');
+console.log('Start1');
 setTimeout(() => console.log('timeout 1'));
 setTimeout(() => console.log('timeout 2'));
 Promise.resolve()
@@ -433,16 +433,18 @@ Promise.resolve()
 console.log('End');
 
 
-const arr: number[] = []
+const arr: number[] = [];
 for (let i: number = 0; i < 10000; i++) {
     arr.push(i);
 }
-console.log('Start')
-console.time('Schedule')
+console.log('Start');
+console.time('Schedule');
 from(arr)
     .pipe(map((v: number) => v * 2 % 3))
-    .subscribe(() => {}, () => {}, () => {
+    .subscribe(() => {
+    }, () => {
+    }, () => {
         console.timeEnd('Schedule');
-    })
+    });
 
 console.log('End');

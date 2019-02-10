@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for AntonPugachev\homework.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">AntonPugachev/</a> homework.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>38/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>8/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>38/38</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">type stringOrNumber = string | number;
+type customType = string | number | boolean ;
+&nbsp;
+/***
+ 1) Написать функцию isInArray(), которая начиная со второго принимает переменное количество аргументов.
+ Возвращает true, если все аргументы, кроме первого входят в первый.
+ Первым всегда должен быть массив.
+ */
+function isInArray(arr: customType[], ...args: customType[]): boolean {
+    return args.every((item: customType) =&gt; {
+        return arr.includes(item);
+    });
+}
+&nbsp;
+/**
+ 2) Написать функцию summator(), которая суммирует переданые ей аргументы.
+ Аргументы могут быть либо строкового либо числового типа. Количество их не ограничено
+ * */
+&nbsp;
+function isString(val: stringOrNumber): val is string {
+    return typeof val === 'string';
+}
+&nbsp;
+function summator(..._args: stringOrNumber[]): number|null {
+    try {
+        return _args.reduce&lt;number&gt;((sum: number, item: stringOrNumber) =&gt; {
+            if (isNaN(Number(item)) || item === null) {
+                throw new Error('не верный тип');
+            }
+            return sum + (isString(item) ? Number(item) : item);
+        }, 0);
+    } catch (e) {
+        console.log(e.message);
+        return null;
+    }
+}
+&nbsp;
+/**
+ 3)Написать функцию getUnique(arr), которая принимает аргументом неограниченое число аргументов,
+ и возвращает массив уникальных элементов. Аргумент не должен изменяться.
+ Порядок элементов результирующего массива должен совпадать с порядком,
+ в котором они встречаются в оригинальной структуре.
+ */
+function getUnique(...args: stringOrNumber[]): stringOrNumber[] {
+    const result: stringOrNumber[] = [];
+    new Set(args).forEach((value1: stringOrNumber) =&gt; {
+        result.push(value1);
+    });
+    return result;
+}
+&nbsp;
+/**
+ 4)Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
+ возвращает новый массив. Число показывает количество элементов в подмассивах,
+ элементы подмассивов беруться из массива data.
+ Оригинальный массив не должен быть изменен.
+ */
+function toMatrix(data: customType[], rowSize: number): customType[][] {
+    const arr: customType[][] = [];
+    let partArr: customType[] = [];
+    data.forEach((item: customType, index: number) =&gt; {
+        ((index + 1) % rowSize === 0) ?
+            (partArr.push(item), arr.push(partArr), partArr = []) :
+            partArr.push(item);
+    });
+    return arr;
+}
+&nbsp;
+// tslint:disable-next-line
+// function logMethod1(_target: Object, _methodName: string, descriptor: PropertyDescriptor): any {
+//     const originalDescriptorValue: Function = descriptor.value;
+//     return { ...descriptor,
+// // tslint:disable-next-line
+//         value: (...args: any[]) =&gt; {
+//             const strArgs: string = args
+//             // tslint:disable-next-line
+//                 .map((arg: any) =&gt; JSON.stringify(arg))
+//                 .join();
+// // tslint:disable-next-line
+//             const result: any = originalDescriptorValue(...args);
+//             const r: string = JSON.stringify(result);
+// // tslint:disable-next-line
+//             console.log(`Call: ${_methodName} (${strArgs}) =&gt; ${r}`);
+//             return result;
+//         }
+//     };
+// }
+&nbsp;
+// —-------------------------------------------------------------------------------------------—
+export class Homework {
+    // @logMethod1
+    // public isInArray(arr: customType[], ...args: customType[]): boolean {
+    //     return args.every((item: customType) =&gt; {
+    //         return arr.includes(item);
+    //     });
+    // }
+    public _isInArray: Function = isInArray;
+    public _summator: Function = summator;
+    public _getUnique: Function = getUnique;
+    public _toMatrix: Function = toMatrix;
+}
+&nbsp;
+const newHomework: Homework = new Homework();
+&nbsp;
+console.log('задание 1');
+console.log(newHomework._isInArray([null, 2, 3, ''], 1));
+console.log('задание 2');
+console.log(newHomework._summator('1', 'asd', 2, 3));
+console.log('задание 3');
+console.log(newHomework._getUnique(2, '3', 1, 1, 1, 7, 1, 1, 2, 2, 2, 2));
+console.log('задание 4');
+console.log(newHomework._toMatrix([1, 2, true, 4, 5, 6, 7], 4));
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Feb 10 2019 17:50:36 GMT+0300 (RTZ 2 (зима))
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

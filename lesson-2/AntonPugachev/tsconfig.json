@@ -3,11 +3,11 @@
   "compilerOptions": {
     "target": "es2017",
     "lib": ["es5","es2015","es2016.array.include","dom"],
-    "inlineSourceMap": false, // this line
-    "sourceMap": false // and this one
+       "sourceMap": true
   },
   "include": [
     "./homework.ts",
-    "./homework.spec.ts"
+    "./homework.spec.ts",
+    "./index.ts"
   ]
 }
