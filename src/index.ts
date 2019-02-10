@@ -1,7 +1,4 @@
 // ReactiveX = Iterator + Observer
-
-import { Observable, Subscriber } from 'rxjs';
-import { delay, retryWhen } from 'rxjs/operators';
 //
 // const sequence$: Observable<number> = from([1, 2, 3, 4]);
 //
@@ -158,6 +155,9 @@ import { delay, retryWhen } from 'rxjs/operators';
 //     console.log('completed');
 // });
 
+import { map } from 'rxjs/operators';
+import { from } from 'rxjs';
+
 /**zip */
 // const sequence1$: Observable<string> = of('h', 'e', 'l', 'l', 'o');
 // const sequence2$: Observable<number> = interval(400)
@@ -238,3 +238,211 @@ import { delay, retryWhen } from 'rxjs/operators';
 //     });
 
 // skip(5), take(3), skip(5), TODO skipWhile =>
+
+// const sequence$: Observable<number | string> = interval(1000)
+//     .pipe(
+//         map((value: number) => {
+//             if (value % 3 === 0 && value !== 0) {
+//                 return value.toString();
+//             }
+//             return value;
+//         })
+//     );
+//
+// sequence$
+//     .pipe(
+//         switchMap((value: number) => {
+//             return of(value)
+//                 .pipe(
+//                     map((v: number) => {
+//                             return v.toFixed();
+//                         }
+//                     ),
+//                     catchError(() => {
+//                         return of(0);
+//                     })
+//                 );
+//         })
+//         // map((value: number) => {
+//         //     try {
+//         //         return value.toFixed();
+//         //     } catch (err) {
+//         //         console.log(err);
+//         //         return value;
+//         //     }
+//         //     // return value.toFixed();
+//         // }),
+//         // catchError(() => {
+//         //     return  of(0);
+//         // })
+//     )
+//     .subscribe((value: number | string | Observable<string | number>) => {
+//         console.log(value);
+//     }, (err: Error) => {
+//         console.log(err);
+//     }, () => {
+//         console.log('complete');
+//     });
+// function a (b){
+//     return b+1;
+// }
+
+// class SkipLimitSubscribe extends Subscriber<number> {
+//
+//     private _interval: number = 1;
+//     private _count: number = 1;
+//
+//     public constructor(subscriber: Subscriber<number>, private _skip: number, private _limit: number) {
+//         super(subscriber);
+//     }
+//
+//     protected _next(value: number): void {
+//         const borderLow: number = this._interval * (this._skip + this._limit) - this._limit;
+//         const borderHight: number = borderLow + this._limit;
+//         if (borderLow < this._count && this._count <= borderHight) {
+//             this.destination && this.destination.next(value);
+//             this._count++;
+//             if (borderHight < this._count) {
+//                 this._interval++;
+//             }
+//             return;
+//         }
+//         this._count++;
+//     }
+// }
+//
+// function skipLimit(skip: number, limit: number): (source: Observable<number>) => Observable<number> {
+//     return (source: Observable<number>): Observable<number> => {
+//         return source.lift({
+//             call(subscriber: Subscriber<number>): void {
+//                 source.subscribe(new SkipLimitSubscribe(subscriber, skip, limit));
+//             }
+//         });
+//     };
+// }
+//
+// interval(1000)
+//     .pipe(skipLimit(4, 3))
+//     .subscribe((value: number) => {
+//         console.log(value);
+//     });
+
+
+// const sequence1$: Observable<number> = interval(1000)
+//     .pipe(take(4));
+// const highOrderSequence$: Observable<number> = sequence1$.pipe(
+//     switchMap((_value: number) => of(1, 2)),
+// )
+//
+// highOrderSequence$.subscribe((value: number) => {
+//     console.log(value);
+// });
+
+// iterator + observer = Observable;
+
+// const sequence$: Observable<number> = interval(1000);
+
+// Observable + observer = Subject
+
+
+// const sequence$$: AsyncSubject<string> = new AsyncSubject();
+// sequence$$.subscribe((value: string) => {
+//     console.log('sub 0 ===>', value);
+// })
+// sequence$$.next('Java');
+
+
+// const sub1: Subscription = sequence$$.subscribe((value: string) => {
+//     console.log('sub 1===>', value);
+// })
+// sequence$$.next('Hi');
+//
+//
+// sequence$$.complete();
+//
+// sequence$$.subscribe((value: string) => {
+//     console.log('sub 1 ===>', value);
+// })
+// setTimeout(() => {
+//     console.log('After 10 sec');
+//     sequence$$.subscribe((value: string) => {
+//         console.log('sub 2 ===>', value);
+//     });
+// }, 10000)
+
+// setTimeout(() => {
+//     console.log('After 5 sec');
+//     sequence$$.next('TypeScript');
+//     // sub1.unsubscribe();
+//     // sequence$$.subscribe((value: string) => {
+//     //     console.log('sub 2===>', value);
+//     // });
+// }, 5000)
+// setTimeout(() => {
+//     sequence$$.next('Cool');
+// }, 9800)
+// setTimeout(() => {
+//     console.log('After 10 sec');
+//     sequence$$.next('Angular');
+//     sequence$$.subscribe((value: string) => {
+//         console.log('sub 3===>', value);
+//     });
+// }, 10000)
+
+// multicast + Subject  = publish()
+
+
+// const connectableObservable$: ConnectableObservable<number> = interval(1000)
+//         .pipe(
+//             publish()
+//         ) as ConnectableObservable<number>;
+//
+// connectableObservable$.subscribe((value: number) => {
+//     console.log('sub1 =>>>', value);
+// })
+//
+// setTimeout(() => {
+//     connectableObservable$.connect();
+// }, 3000);
+//
+//
+// setTimeout(() => {
+//     connectableObservable$.subscribe((value: number) => {
+//         console.log('sub2 =>>>', value);
+//     });
+// }, 10000);
+
+
+// connectableObservable$.connect();
+
+
+// EventLoop  ---(1 macrotask)---(1 macrotask)---(1 macrotask)---
+//                start           timeout 1       timeout 2
+//                End
+//
+//                promise 1
+//                promise 2
+
+console.log('Start');
+setTimeout(() => console.log('timeout 1'));
+setTimeout(() => console.log('timeout 2'));
+Promise.resolve()
+    .then(() => console.log('promise 1'));
+Promise.resolve()
+    .then(() => console.log('promise 2'));
+console.log('End');
+
+
+const arr: number[] = [];
+for (let i: number = 0; i < 10000; i++) {
+    arr.push(i);
+}
+console.log('Start');
+console.time('Schedule');
+from(arr)
+    .pipe(map((v: number) => v * 2 % 3))
+    .subscribe(() => {}, () => {}, () => {
+        console.timeEnd('Schedule');
+    });
+
+console.log('End');
