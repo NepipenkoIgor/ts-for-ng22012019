@@ -74,11 +74,11 @@
         ],
         "max-file-line-count": [
             true,
-            1500
+            2000
         ],
         "max-line-length": [
             true,
-            120
+            150
         ],
         "no-consecutive-blank-lines": [
             true,
