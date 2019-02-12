@@ -155,8 +155,9 @@
 //     console.log('completed');
 // });
 
-import { map } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from, fromEvent, Observable, of, SchedulerLike } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, pluck, switchMap } from 'rxjs/operators';
+import { async } from 'rxjs/internal/scheduler/async';
 
 /**zip */
 // const sequence1$: Observable<string> = of('h', 'e', 'l', 'l', 'o');
@@ -423,26 +424,61 @@ import { from } from 'rxjs';
 //                promise 1
 //                promise 2
 
-console.log('Start');
-setTimeout(() => console.log('timeout 1'));
-setTimeout(() => console.log('timeout 2'));
-Promise.resolve()
-    .then(() => console.log('promise 1'));
-Promise.resolve()
-    .then(() => console.log('promise 2'));
-console.log('End');
-
-
-const arr: number[] = []
-for (let i: number = 0; i < 10000; i++) {
-    arr.push(i);
+// console.log('Start');
+// setTimeout(() => console.log('timeout 1'));
+// setTimeout(() => console.log('timeout 2'));
+// Promise.resolve()
+//     .then(() => console.log('promise 1'));
+// Promise.resolve()
+//     .then(() => console.log('promise 2'));
+// console.log('End');
+//
+//
+// const arr: number[] = []
+// for (let i: number = 0; i < 10000; i++) {
+//     arr.push(i);
+// }
+// console.log('Start')
+// console.time('Schedule')
+// from(arr)
+//     .pipe(map((v: number) => v * 2 % 3))
+//     .subscribe(() => {}, () => {}, () => {
+//         console.timeEnd('Schedule');
+//     })
+//
+// console.log('End');
+interface IItem {
+    name: string;
 }
-console.log('Start')
-console.time('Schedule')
-from(arr)
-    .pipe(map((v: number) => v * 2 % 3))
-    .subscribe(() => {}, () => {}, () => {
-        console.timeEnd('Schedule');
-    })
 
-console.log('End');
+const searchInput: HTMLInputElement = document.querySelector('.live-search') as HTMLInputElement;
+const searchInputEventSequence$: Observable<Event> = fromEvent(searchInput, 'input');
+
+function searchFetch(value: string): Observable<IItem[]> {
+    return from(fetch(`https://api.github.com/search/repositories?q=${value}`)
+        .then((response: Response) => response.json()));
+}
+
+
+function search(
+    source1$: Observable<Event>,
+    sourceCreator: (value: string) => Observable<IItem[]>,
+    schedule: SchedulerLike = async
+): Observable<IItem[]> {
+    return source1$
+        .pipe(
+            debounceTime(500, schedule),
+            pluck('target', 'value'),
+            filter((value: string) => value !== ''),
+            distinctUntilChanged(),
+            switchMap((value: string) => sourceCreator(value)
+                .pipe(
+                    catchError(() => of([]))
+                ))
+        );
+}
+
+search(searchInputEventSequence$, searchFetch)
+    .subscribe((result: IItem[]) => {
+        console.log(result);
+    });
