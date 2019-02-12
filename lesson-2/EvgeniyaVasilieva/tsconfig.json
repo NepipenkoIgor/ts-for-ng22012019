@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2018",
+    "lib": ["dom","es2018"]
+  },
+  "include": [
+    "./homework.ts",
+    "./homework.spec.ts"
+  ]
+}
