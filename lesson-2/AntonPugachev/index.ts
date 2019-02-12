@@ -1,12 +1,31 @@
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
+/** тип данных на  ответ от сервера*/
 type tItem = { id: number, name: string };
-// ответ от сервера
-const stream$$: Subject<tItem[]> = new Subject;
-// получение данных
-stream$$.subscribe((data: tItem[]) => {
+
+// ----------------------------------------------------------------------------------------------
+/** класс для поиска*/
+export class Homework {
+    public stream$$: Subject<tItem[]> = new Subject;
+    public source$: Observable<String> = fromEvent($('.live-search'), 'keyup')
+        .pipe(
+            map((ev: Event) => {
+                return (ev.target as HTMLInputElement).value;
+            })
+        );
+
+    @debounce(200)
+    public getDataFromGit(search: string): string {
+        getData(search);
+        return search;
+    }
+}
+
+const myClass: Homework = new Homework;
+// ----------------------------------------------------------------------------------------------
+/** получение данных*/
+myClass.stream$$.subscribe((data: tItem[]) => {
     console.log(data);
     $('.list li').remove();
     data.forEach((item: tItem) => {
@@ -16,18 +35,17 @@ stream$$.subscribe((data: tItem[]) => {
     });
 });
 
-
-/** чисто получение репо*/
+// ----------------------------------------------------------------------------------------------
+/** чисто запрос*/
 function getData(search: string): void {
     $.ajax({
         url: 'https://api.github.com/users/mun4kin/repos',
         method: 'GET',
         dataType: 'json',
-        // tslint:disable-next-line
-        success: function (res: tItem[]) {
-            stream$$.next(res
+        success: (res: tItem[]): void => {
+            myClass.stream$$.next(res
                 .filter((item: tItem) => {
-                   return  ~item.name.toLowerCase().indexOf(search.toLowerCase());
+                    return ~item.name.toLowerCase().indexOf(search.toLowerCase());
                 })
                 .map((item: tItem) => {
                     return {
@@ -39,47 +57,24 @@ function getData(search: string): void {
     });
 }
 
-//  класс для поиска
-export class Homework {
-    @debounce(500)
-    public getDataFromGit(search: string): string {
-        getData(search);
-        return search;
-    }
-}
-
-const myClass: Homework = new Homework;
-// вытаскиваем значение для поиска
-const source$: Observable<String> = fromEvent($('.live-search'), 'keyup')
-    .pipe(
-        map((ev: Event) => {
-            return (ev.target as HTMLInputElement).value;
-        })
-    );
-
-source$.subscribe((val: string) => {
+// ----------------------------------------------------------------------------------------------
+/** подписка на событие инпута*/
+myClass.source$.subscribe((val: string) => {
     myClass.getDataFromGit(val);
 });
-
-
+// ----------------------------------------------------------------------------------------------
 // отложенный запуск поиска
 function debounce(ms: number): Function {
-    return (
-        _target: Object,
-        _methodName: string,
-        descriptor: PropertyDescriptor
-    ): PropertyDescriptor => {
+    return (target: Object, _methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
         const originalDescriptorValue: Function = descriptor.value;
         let timer: number | null = null;
-
-        // tslint:disable-next-line
-        function decorated(...args: any[]): void {
+        function decorated(...args: string[]): void {
             if (timer) {
                 clearTimeout(timer);
             }
             timer = setTimeout(() => {
                 timer = null;
-                originalDescriptorValue.apply(_target, args);
+                originalDescriptorValue.apply(target, args);
             }, ms);
         }
 
@@ -89,5 +84,6 @@ function debounce(ms: number): Function {
         };
     };
 }
-
-
+// ----------------------------------------------------------------------------------------------
+/** первый вызов без поиска*/
+getData('');
