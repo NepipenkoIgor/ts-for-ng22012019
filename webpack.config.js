@@ -8,6 +8,9 @@ module.exports = {
     chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, 'dist')
   },
+  devServer: {
+    overlay: true
+  },
   devtool: "source-map",
   resolve: {
     extensions: ['.ts', '.js', '.json']
