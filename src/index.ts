@@ -433,16 +433,16 @@ Promise.resolve()
 console.log('End');
 
 
-const arr: number[] = []
+const arr: number[] = [];
 for (let i: number = 0; i < 10000; i++) {
     arr.push(i);
 }
-console.log('Start')
-console.time('Schedule')
+console.log('Start');
+console.time('Schedule');
 from(arr)
     .pipe(map((v: number) => v * 2 % 3))
     .subscribe(() => {}, () => {}, () => {
         console.timeEnd('Schedule');
-    })
+    });
 
 console.log('End');
