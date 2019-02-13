@@ -2,7 +2,7 @@ module.exports = (config) => {
   config.set({
     frameworks: ["jasmine", "karma-typescript"],
     files: [
-      { pattern: './lesson-2/OstrovskyiHerman/**/*.ts' }
+      { pattern: './lesson-2/Julia_Ki/**/*.ts' }
     ],
     preprocessors: {
       "**/*.ts": ["karma-typescript"]
@@ -11,7 +11,7 @@ module.exports = (config) => {
     browsers: ["ChromeHeadless"],
     singleRun: true,
     karmaTypescriptConfig: {
-      tsconfig: "./lesson-2/OstrovskyiHerman/tsconfig.json",
+      tsconfig: "./lesson-2/Julia_Ki/tsconfig.json",
       reports: {
         "html": "coverage",
         "text": ""

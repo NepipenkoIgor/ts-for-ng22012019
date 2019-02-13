@@ -8,9 +8,6 @@ module.exports = {
     chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, 'dist')
   },
-  devServer: {
-    overlay: true
-  },
   devtool: "source-map",
   resolve: {
     extensions: ['.ts', '.js', '.json']
@@ -22,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/decorators.html"
+      template: "./src/index.html"
     })
   ]
 };

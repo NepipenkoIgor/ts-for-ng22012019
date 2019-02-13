@@ -6,7 +6,11 @@ class MathLib {
 }
 
 // @ts-ignore
-function logMethod (_target: Object, methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor {
+function logMethod (
+        _target: Object,
+        methodName: string,
+        descriptor: PropertyDescriptor
+    ): PropertyDescriptor {
     // захватываем оригинал-й метод
     const originalDescriptorValue: Function  = descriptor.value;
     return {
@@ -16,7 +20,6 @@ function logMethod (_target: Object, methodName: string, descriptor: PropertyDes
             // аргументы внешней ф-ии и их переработка
             const strArgs: string = args
                 .map((arg: any) => {
-                    console.log(arg);
                     return JSON.stringify(arg);
                 })
                 .join('');
@@ -24,8 +27,8 @@ function logMethod (_target: Object, methodName: string, descriptor: PropertyDes
             // вызов оригинального метода ф-ии с аргу-м, переданный во внешнюю ф-ю
             const result: any = originalDescriptorValue(...args);
             // переработка результата работы ф-ии
-            const r = JSON.stringify(result);
-            console.log(`Call: ${methodName} (${strArgs}) => ${r}`);
+            // const r = JSON.stringify(result);
+            console.log(`Call: ${methodName} (${strArgs}) => ${result}`);
             return result;
         }
     };
