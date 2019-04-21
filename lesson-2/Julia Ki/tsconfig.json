@@ -1,9 +1,0 @@
-{
-  "extends": "../../../tsconfig.json",
-  "include": [
-    "./basics-2.ts",
-    "./Decorator_log.ts",
-    "./homework.ts",
-    "./Debounce.ts"
-  ]
-}

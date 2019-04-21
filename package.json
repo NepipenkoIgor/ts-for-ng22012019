@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx karma start lesson-2/AntonPugachev/karma.conf.js",
-    "run": "npx ts-node --project lesson-2/AntonPugachev/tsconfig.json lesson-2/AntonPugachev/homework.ts",
+    "run": "npx webpack-dev-server",
     "instalWebPack": "npm add webpack webpack-dev-server webpack-cli ts-loader -D"
   },
   "author": "",
