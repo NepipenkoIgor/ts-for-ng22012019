@@ -13,6 +13,8 @@ class Point {
 
     public draw(canvas: ImageData): void {
         const index: number = (this.x + this.y * 500) * 4;
+        this.color.alpha = (this.color.alpha > 255) ? 255 : this.color.alpha;
+        this.color.alpha = (this.color.alpha < 0) ? 0 : this.color.alpha;
         canvas.data[index] = this.color.red;
         canvas.data[index + 1] = this.color.green;
         canvas.data[index + 2] = this.color.blue;
@@ -35,6 +37,7 @@ class Line {
     }
 
     public BRLine(canvasData: ImageData): void {
+        this.color.alpha = 255;
         const p1: Point = this.firstPoint;
         const p2: Point = this.secondPoint;
         const currentP: Point = jQuery.extend(true, {}, this.firstPoint);
@@ -61,7 +64,40 @@ class Line {
         }
     }
 
+
+    // ==========================================================
+    public SYAOLine(canvasData: ImageData): void {
+        const fpart: Function = (x: number): number => (x < 0) ? (1 - (x - Math.floor(x))) : (x - Math.floor(x));
+        const rfpart: Function = (x: number): number => 1 - fpart(x);
+        const newPoint: Function = (st: boolean, x: number, y: number): void => {
+            (st) ? new Point(x, y, this.color).draw(canvasData) : new Point(y, x, this.color).draw(canvasData);
+        };
+        const p1: Point = this.firstPoint;
+        const p2: Point = this.secondPoint;
+        const steep: boolean = Math.abs(p2.y - p1.y) > Math.abs(p2.x - p1.x);
+        //  делаем так чтобы рисовать всегда в первом квадранте
+        if (steep) {
+            p1.x = p1.x * p1.y / (p1.y = p1.x);
+            p2.x = p2.x * p2.y / (p2.y = p2.x);
+        }
+        if (p1.x > p2.x) {
+            p1.x = p1.x * p2.x / (p2.x = p1.x);
+            p1.y = p1.y * p2.y / (p2.y = p1.y);
+        }
+        const gradient: number = (p2.y - p1.y) / (p2.x - p1.x);
+        let intery: number = p1.y + gradient * (Math.round(p1.x) - p1.x) + gradient;
+        for (let x: number = Math.trunc(p1.x + 1); x <= Math.trunc(p2.x - 1); x++) {
+            this.color.alpha = 255 * rfpart(intery);
+            newPoint(steep, Math.trunc(intery), x);
+            this.color.alpha = 255 * fpart(intery);
+            newPoint(steep, Math.trunc(intery) + 1, x);
+            intery += gradient;
+        }
+
+    }
+
     public CDALine(canvasData: ImageData): void {
+        this.color.alpha = 255;
         const p1: Point = this.firstPoint;
         const p2: Point = this.secondPoint;
         /*считаем максимальную длину  по вертикали и горизонтали*/
@@ -121,8 +157,23 @@ export class DrawClass {
             this.line.setPoint('second', undefined);
         } else {
             this.line.setPoint('second', new Point(pX, pY));
+
+            //   this.line.setPoint('first', new Point(300, 1));
+            //   this.line.setPoint('second', new Point(100, 100));
             console.time('test');
-            (this.alg === 'br') ? this.line.BRLine(this.canvasData) : this.line.CDALine(this.canvasData);
+            switch (this.alg) {
+                case 'br':
+                    this.line.BRLine(this.canvasData);
+                    break;
+                case 'cda':
+                    this.line.CDALine(this.canvasData);
+                    break;
+                case 'syao':
+                    this.line.SYAOLine(this.canvasData);
+                    break;
+                default:
+                    break;
+            }
             this.refresh();
             console.timeEnd('test');
         }
@@ -145,4 +196,8 @@ document.getElementById('cda').addEventListener('mousedown', () => {
 });
 document.getElementById('br').addEventListener('mousedown', () => {
     drClass.setAlg('br');
+});
+
+document.getElementById('syao').addEventListener('mousedown', () => {
+    drClass.setAlg('syao');
 });
